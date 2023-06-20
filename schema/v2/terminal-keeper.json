@@ -16,12 +16,9 @@
           "description": "Used to determine which session to use."
         },
         "theme": {
-            "enum": [
-              "auto",
-              "manual"
-            ],
-            "description": "The theme can either automatically select colors/icons or manually."
-          },
+          "enum": ["auto", "manual"],
+          "description": "The theme can either automatically select colors/icons or manually."
+        },
         "keepExistingTerminals": {
           "type": "boolean",
           "default": false,
