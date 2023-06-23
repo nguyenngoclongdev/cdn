@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/v4/terminal-keeper.json",
+  "active": "default",
+  "activateOnStartup": false,
+  "keepExistingTerminals": false,
+  "theme": "default",
+  "sessions": {
+    "default": [
+      {
+        "name": "init",
+        "commands": ["echo hello1", "echo hello2"],
+        "autoExecuteCommands": true,
+        "cwd": ".",
+        "env": {
+          "asdsa": "asdsadj",
+          "dfdfdf": "asdsadj",
+          "adsda": "true"
+        },
+        "color": "terminal.ansiBrightYellow",
+        "icon": "debug-configure"
+      },
+      [
+        {
+          "name": "init",
+          "commands": ["echo hello1", "echo hello2"],
+          "autoExecuteCommands": true,
+          "cwd": ".",
+          "color": "terminal.ansiBrightYellow",
+          "icon": "debug-configure"
+        },
+        {
+          "name": "init",
+          "commands": ["echo hello1", "echo hello2"],
+          "autoExecuteCommands": true,
+          "cwd": ".",
+          "color": "terminal.ansiBrightYellow",
+          "icon": "debug-configure"
+        }
+      ]
+    ]
+  }
+}
