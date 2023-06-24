@@ -16,7 +16,7 @@
           "description": "Used to determine which session to use."
         },
         "theme": {
-          "enum": ["default", "inkwell", "chaos", "tribe", "iconic"],
+          "enum": ["default", "inkwell", "chaos", "tribe", "iconic", "neon"],
           "description": "The theme can either automatically select colors/icons or manually."
         },
         "keepExistingTerminals": {
