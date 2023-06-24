@@ -12,10 +12,11 @@
         "autoExecuteCommands": true,
         "cwd": ".",
         "env": {
-          "asdsa": "asdsadj",
-          "dfdfdf": "asdsadj",
-          "adsda": "true"
+          "env1": "value",
+          "env2": "value",
+          "env3": "value"
         },
+        "shellArgs": ["arg"],
         "color": "terminal.ansiBrightYellow",
         "icon": "debug-configure"
       },
