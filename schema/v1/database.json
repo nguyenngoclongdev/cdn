@@ -1,0 +1,199 @@
+{
+    "$schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v1/data-sync.json",
+    "verbose": true,
+    "patterns": {
+        "iam": {
+            "source": {
+                "driver": "PostgreSQL",
+                "database": "SourceCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "target": {
+                "driver": "PostgreSQL",
+                "database": "TargetCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "diff": {
+                "format": false,
+                "tables": [
+                    {
+                        "schema": "public",
+                        "name": "rqn_pattern",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "m_permission_service",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "m_permission_group",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "m_permission_routing_resource",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "id"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "m_permission_component_resource",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "id"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "m_permission_api_resource",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "id"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "permission",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "orderBy": "code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "iam_policy",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "where": "customer_id = 'JHQMFFE8sJ'",
+                        "orderBy": "code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "iam_policy_permission_link",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "where": "customer_id = 'JHQMFFE8sJ'",
+                        "orderBy": "iam_policy_code, permission_code"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "iam_role",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "where": "customer_id = 'JHQMFFE8sJ'",
+                        "orderBy": "name"
+                    },
+                    {
+                        "schema": "public",
+                        "name": "iam_role_policy_link",
+                        "excludes": [
+                            "updated_at",
+                            "created_at"
+                        ],
+                        "where": "customer_id = 'JHQMFFE8sJ'",
+                        "orderBy": "iam_role_code, iam_policy_code"
+                    }
+                ]
+            },
+            "migrate": {
+                "noInsert": false,
+                "noUpdate": false,
+                "noDelete": true,
+                "noRowAffected": "throw",
+                "multipleRowAffected": "throw"
+            }
+        },
+        "machine": {
+            "source": {
+                "driver": "PostgreSQL",
+                "database": "SourceCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "target": {
+                "driver": "PostgreSQL",
+                "database": "TargetCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "migrate": {
+                "noInsert": false,
+                "noUpdate": false,
+                "noDelete": true
+            },
+            "diff": {
+                "tables": [
+                    {
+                        "name": "abc"
+                    }
+                ]
+            }
+        },
+        "maps": {
+            "source": {
+                "driver": "PostgreSQL",
+                "database": "SourceCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "target": {
+                "driver": "PostgreSQL",
+                "database": "TargetCustomer",
+                "host": "localhost",
+                "port": 5432,
+                "user": "postgres",
+                "password": "123456"
+            },
+            "migrate": {
+                "noInsert": false,
+                "noUpdate": false,
+                "noDelete": true
+            },
+            "diff": {
+                "tables": [
+                    {
+                        "name": "abc"
+                    }
+                ]
+            }
+        }
+    }
+}
