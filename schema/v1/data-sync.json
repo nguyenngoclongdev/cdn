@@ -1,0 +1,236 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$ref": "#/definitions/data-sync",
+    "definitions": {
+        "data-sync": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "description": "Path of the json schema."
+                },
+                "verbose": {
+                    "type": "boolean",
+                    "description": "Include verbose log in migrate data.",
+                    "default": true
+                },
+                "patterns": {
+                    "$ref": "#/patterns"
+                }
+            },
+            "required": [
+                "patterns"
+            ]
+        }
+    },
+    "patterns": {
+        "type": "object",
+        "description": "The pattern list.",
+        "patternProperties": {
+            "^.*$": {
+                "$ref": "#/pattern-item"
+            }
+        }
+    },
+    "pattern-item": {
+        "type": "object",
+        "description": "The pattern item.",
+        "additionalProperties": false,
+        "properties": {
+            "verbose": {
+                "type": "boolean",
+                "description": "Include verbose log in migrate data.",
+                "default": true
+            },
+            "source": {
+                "$ref": "#/database"
+            },
+            "target": {
+                "$ref": "#/database"
+            },
+            "diff": {
+                "$ref": "#/diff"
+            },
+            "migrate": {
+                "$ref": "#/migrate"
+            }
+        },
+        "required": [
+            "source",
+            "target",
+            "diff"
+        ]
+    },
+    "database": {
+        "type": "object",
+        "description": "The database connection section, uses to config database.",
+        "additionalProperties": true,
+        "properties": {
+            "user": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "host": {
+                "type": "string"
+            },
+            "database": {
+                "type": "string"
+            },
+            "port": {
+                "type": "number"
+            },
+            "connectionString": {
+                "type": "string"
+            },
+            "ssl": {
+                "type": "object",
+                "description": "Passed directly to node.TLSSocket, supports all tls.connect options"
+            },
+            "types": {
+                "type": "object",
+                "description": "Custom type parsers"
+            },
+            "statement_timeout": {
+                "type": "number",
+                "description": "Number of milliseconds before a statement in query will time out, default is no timeout"
+            },
+            "query_timeout": {
+                "type": "number",
+                "description": "Number of milliseconds before a query call will timeout, default is no timeout"
+            },
+            "application_name": {
+                "type": "string",
+                "description": "The name of the application that created this Client instance"
+            },
+            "connectionTimeoutMillis": {
+                "type": "number",
+                "description": "Number of milliseconds to wait for connection, default is no timeout"
+            },
+            "idleTimeoutMillis": {
+                "type": "number",
+                "description": "Number of milliseconds a client must sit idle in the pool and not be checked out before it is disconnected from the backend and discarded, default is 10000 (10 seconds) - set to 0 to disable auto-disconnection of idle clients"
+            },
+            "max": {
+                "type": "number",
+                "description": "Maximum number of clients the pool should contain by default this is set to 10."
+            },
+            "allowExitOnIdle": {
+                "type": "boolean",
+                "description": "Default behavior is the pool will keep clients open & connected to the backend until idleTimeoutMillis expire for each client and node will maintain a ref to the socket on the client, keeping the event loop alive until all clients are closed after being idle or the pool is manually shutdown"
+            },
+            "idle_in_transaction_session_timeout": {
+                "type": "number",
+                "description": "Number of milliseconds before terminating any session with an open idle transaction, default is no timeout"
+            }
+        }
+    },
+    "diff": {
+        "type": "object",
+        "description": "The diff section, setting options uses on compare.",
+        "additionalProperties": false,
+        "properties": {
+            "format": {
+                "type": "boolean",
+                "description": "Formating the diff files.",
+                "default": false
+            },
+            "tables": {
+                "type": "array",
+                "description": "The table uses to compare data.",
+                "minItems": 1,
+                "additionalProperties": false,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "schema": {
+                            "type": "string",
+                            "description": "The database table schema"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The database table name"
+                        },
+                        "excludes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Exclude one or more columns"
+                        },
+                        "orderBy": {
+                            "type": "string",
+                            "description": "Order by column (.e.g iam_role_code, iam_policy_code)"
+                        },
+                        "where": {
+                            "type": "string",
+                            "description": "Custom where query (.e.g customer_id = 'JHQMFFE8sJ')"
+                        },
+                        "columns": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Define columns you want get to compare"
+                        },
+                        "primaryKeys": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Define primary keys of table"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            }
+        },
+        "required": [
+            "tables"
+        ]
+    },
+    "migrate": {
+        "type": "object",
+        "description": "The migrate section, setting options uses on compare.",
+        "additionalProperties": false,
+        "properties": {
+            "noInsert": {
+                "type": "boolean",
+                "description": "No generate the insert record.",
+                "default": false
+            },
+            "noUpdate": {
+                "type": "boolean",
+                "description": "No generate the update record.",
+                "default": false
+            },
+            "noDelete": {
+                "type": "boolean",
+                "description": "No generate the delete record.",
+                "default": false
+            },
+            "noRowAffected": {
+                "enum": [
+                    "ignore",
+                    "log",
+                    "warn",
+                    "throw"
+                ],
+                "description": "Action on no row affected when migrate data"
+            },
+            "multipleRowAffected": {
+                "enum": [
+                    "ignore",
+                    "log",
+                    "warn",
+                    "throw"
+                ],
+                "description": "Action on multiple row affected when migrate data"
+            }
+        }
+    }
+}
